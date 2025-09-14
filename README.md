@@ -30,8 +30,6 @@ yarn dev
 ## 🏗️ Project Structure
 
 <details>
-<summary>Развернуть структуру проекта</summary>
-
 ```
 innuendo/
 ├── .github/                  # GitHub Actions workflows
