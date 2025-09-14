@@ -32,7 +32,7 @@ yarn dev
 <details>
 <summary>Развернуть структуру проекта</summary>
 
-````bash
+```
 innuendo/
 ├── .github/                  # GitHub Actions workflows
 │   └── workflows/            # CI/CD pipeline configurations
@@ -96,7 +96,8 @@ innuendo/
 ├── package.json               # Monorepo configuration
 ├── README.md                  # Project documentation
 └── yarn.lock                  # Dependency lock file
-</details>```
+</details>
+```
 
 ## 🎯 Features
 
@@ -156,7 +157,7 @@ innuendo/
 ```bash
 git clone https://github.com/nikzalevskii/innuendo
 cd innuendo
-````
+```
 
 ### 2. Install Dependencies
 
