@@ -29,6 +29,7 @@ yarn dev
 
 ## 🏗️ Project Structure
 
+
 innuendo/
 ├── .github/ # GitHub Actions workflows
 │ └── workflows/ # CI/CD pipeline configurations
