@@ -29,70 +29,74 @@ yarn dev
 
 ## 🏗️ Project Structure
 
+<details>
+<summary>Развернуть структуру проекта</summary>
 
+````bash
 innuendo/
-├── .github/ # GitHub Actions workflows
-│ └── workflows/ # CI/CD pipeline configurations
-├── docs/ # Project documentation
-│ ├── architecture/ # System design and architecture docs
-│ │ ├── system-design.md
-│ │ ├── database-schema.md
-│ │ └── api-design.md
-│ ├── development/ # Development setup and guidelines
-│ │ ├── setup.md
-│ │ ├── contributing.md
-│ │ └── testing.md
-│ ├── deployment/ # Deployment and infrastructure docs
-│ │ ├── docker.md
-│ │ ├── production.md
-│ │ └── ci-cd.md
-│ └── user-guide/ # User documentation and guides
-│ ├── getting-started.md
-│ ├── features.md
-│ └── faq.md
-├── infra/ # Infrastructure configurations
-│ ├── database/ # Database initialization scripts
-│ └── docker/ # Docker configurations
-├── packages/ # Frontend packages
-│ ├── frontend/ # Next.js 15 application
-│ │ ├── src/
-│ │ │ ├── app/ # Next.js App Router pages
-│ │ │ ├── components/ # React components
-│ │ │ ├── lib/ # Utility functions
-│ │ │ └── types/ # TypeScript type definitions
-│ │ ├── public/ # Static assets
-│ │ ├── package.json
-│ │ ├── next.config.ts
-│ │ ├── tailwind.config.ts
-│ │ └── tsconfig.json
-│ └── shared/ # Shared types and utilities
-│ ├── src/
-│ │ ├── types/ # Shared TypeScript interfaces
-│ │ └── utils/ # Shared utility functions
-│ ├── dist/ # Compiled output
-│ ├── package.json
-│ └── tsconfig.json
-├── services/ # Backend services
-│ ├── api/ # NestJS backend API
-│ │ ├── src/
-│ │ │ ├── modules/ # Feature modules
-│ │ │ ├── common/ # Shared services and utilities
-│ │ │ ├── config/ # Configuration files
-│ │ │ └── main.ts # Application entry point
-│ │ ├── test/ # Test files
-│ │ ├── package.json
-│ │ ├── nest-cli.json
-│ │ └── tsconfig.json
-│ └── ml-service/ # Python ML service (future implementation)
-│ ├── src/
-│ ├── requirements.txt
-│ └── Dockerfile
-├── .env.example # Environment variables template
-├── .gitignore # Git ignore rules
-├── docker-compose.yml # Docker services configuration
-├── package.json # Monorepo configuration
-├── README.md # Project documentation
-└── yarn.lock # Dependency lock file
+├── .github/                  # GitHub Actions workflows
+│   └── workflows/            # CI/CD pipeline configurations
+├── docs/                     # Project documentation
+│   ├── architecture/          # System design and architecture docs
+│   │   ├── system-design.md
+│   │   ├── database-schema.md
+│   │   └── api-design.md
+│   ├── development/           # Development setup and guidelines
+│   │   ├── setup.md
+│   │   ├── contributing.md
+│   │   └── testing.md
+│   ├── deployment/            # Deployment and infrastructure docs
+│   │   ├── docker.md
+│   │   ├── production.md
+│   │   └── ci-cd.md
+│   └── user-guide/            # User documentation and guides
+│       ├── getting-started.md
+│       ├── features.md
+│       └── faq.md
+├── infra/                     # Infrastructure configurations
+│   ├── database/              # Database initialization scripts
+│   └── docker/                # Docker configurations
+├── packages/                  # Frontend packages
+│   ├── frontend/              # Next.js 15 application
+│   │   ├── src/
+│   │   │   ├── app/           # Next.js App Router pages
+│   │   │   ├── components/    # React components
+│   │   │   ├── lib/           # Utility functions
+│   │   │   └── types/         # TypeScript type definitions
+│   │   ├── public/            # Static assets
+│   │   ├── package.json
+│   │   ├── next.config.ts
+│   │   ├── tailwind.config.ts
+│   │   └── tsconfig.json
+│   └── shared/                # Shared types and utilities
+│       ├── src/
+│       │   ├── types/         # Shared TypeScript interfaces
+│       │   └── utils/         # Shared utility functions
+│       ├── dist/              # Compiled output
+│       ├── package.json
+│       └── tsconfig.json
+├── services/                  # Backend services
+│   ├── api/                   # NestJS backend API
+│   │   ├── src/
+│   │   │   ├── modules/       # Feature modules
+│   │   │   ├── common/        # Shared services and utilities
+│   │   │   ├── config/        # Configuration files
+│   │   │   └── main.ts        # Application entry point
+│   │   ├── test/              # Test files
+│   │   ├── package.json
+│   │   ├── nest-cli.json
+│   │   └── tsconfig.json
+│   └── ml-service/            # Python ML service (future implementation)
+│       ├── src/
+│       ├── requirements.txt
+│       └── Dockerfile
+├── .env.example               # Environment variables template
+├── .gitignore                 # Git ignore rules
+├── docker-compose.yml         # Docker services configuration
+├── package.json               # Monorepo configuration
+├── README.md                  # Project documentation
+└── yarn.lock                  # Dependency lock file
+</details>```
 
 ## 🎯 Features
 
@@ -152,7 +156,7 @@ innuendo/
 ```bash
 git clone https://github.com/nikzalevskii/innuendo
 cd innuendo
-```
+````
 
 ### 2. Install Dependencies
 
