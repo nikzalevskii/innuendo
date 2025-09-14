@@ -1,0 +1,78 @@
+version: "3.8"
+
+services:
+  # PostgreSQL - основная база данных
+  postgres:
+    image: postgres:16-alpine
+    container_name: innuendo_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: innuendo
+      POSTGRES_USER: innuendo_user
+      POSTGRES_PASSWORD: innuendo_pass
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/database/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U innuendo_user -d innuendo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis - для очередей и кэширования
+  redis:
+    image: redis:7-alpine
+    container_name: innuendo_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: >
+      redis-server
+      --appendonly yes
+      --appendfsync everysec
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # PgAdmin - веб-интерфейс для БД (опционально)
+  pgadmin:
+    image: dpage/pgadmin4:8
+    container_name: innuendo_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@innuendo.dev
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    profiles:
+      - tools # Запускается только с --profile tools
+
+# Постоянные тома для данных
+volumes:
+  postgres_data:
+    name: innuendo_postgres_data
+  redis_data:
+    name: innuendo_redis_data
+  pgadmin_data:
+    name: innuendo_pgadmin_data
+
+# Сеть проекта
+networks:
+  default:
+    name: innuendo_network
+    driver: bridge

@@ -1,0 +1,42 @@
+{
+  "name": "innuendo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Multimodal Personal Knowledge Graph - AI-powered semantic note system",
+  "author": "Nikita Zalevskii nik.zalevskii@gmail.com",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "services/*"
+  ],
+  "packageManager": "yarn@1.22.22",
+  "scripts": {
+    "dev": "concurrently \"yarn dev:frontend\" \"yarn dev:api\" --names \"NEXT,NEST\" --prefix-colors \"cyan,yellow\"",
+    "dev:frontend": "yarn workspace @innuendo/frontend dev",
+    "dev:api": "yarn workspace @innuendo/api start:dev",
+    "dev:db": "docker compose up postgres redis -d",
+    "build": "yarn workspaces run build",
+    "install:all": "yarn install",
+    "clean": "yarn workspaces run clean && rm -rf node_modules",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "test": "yarn workspaces run test",
+    "test:frontend": "yarn workspace @innuendo/frontend test",
+    "test:api": "yarn workspace @innuendo/api test",
+    "lint": "yarn workspaces run lint",
+    "lint:fix": "yarn workspaces run lint:fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "type-check": "yarn workspaces run type-check"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.3",
+    "concurrently": "^9.2.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "yarn": "^1.22.0"
+  }
+}
