@@ -30,7 +30,7 @@ yarn dev
 ## 🏗️ Project Structure
 
 <details>
-<summary>Развернуть структуру проекта</summary>
+<summary>Expand project structure</summary>
 
 ```bash
 innuendo/
