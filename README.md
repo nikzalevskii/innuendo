@@ -30,72 +30,75 @@ yarn dev
 ## 🏗️ Project Structure
 
 <details>
-```
+<summary>Развернуть структуру проекта</summary>
+
+```bash
 innuendo/
 ├── .github/                  # GitHub Actions workflows
 │   └── workflows/            # CI/CD pipeline configurations
 ├── docs/                     # Project documentation
-│   ├── architecture/          # System design and architecture docs
+│   ├── architecture/         # System design & architecture docs
 │   │   ├── system-design.md
 │   │   ├── database-schema.md
 │   │   └── api-design.md
-│   ├── development/           # Development setup and guidelines
+│   ├── development/          # Development setup & guidelines
 │   │   ├── setup.md
 │   │   ├── contributing.md
 │   │   └── testing.md
-│   ├── deployment/            # Deployment and infrastructure docs
+│   ├── deployment/           # Deployment & infrastructure docs
 │   │   ├── docker.md
 │   │   ├── production.md
 │   │   └── ci-cd.md
-│   └── user-guide/            # User documentation and guides
+│   └── user-guide/           # User documentation & guides
 │       ├── getting-started.md
 │       ├── features.md
 │       └── faq.md
-├── infra/                     # Infrastructure configurations
-│   ├── database/              # Database initialization scripts
-│   └── docker/                # Docker configurations
-├── packages/                  # Frontend packages
-│   ├── frontend/              # Next.js 15 application
+├── infra/                    # Infrastructure configs
+│   ├── database/             # DB init scripts
+│   └── docker/               # Dockerfiles & compose profiles
+├── packages/                 # Frontend & shared packages
+│   ├── frontend/             # Next.js 15 application
 │   │   ├── src/
-│   │   │   ├── app/           # Next.js App Router pages
-│   │   │   ├── components/    # React components
-│   │   │   ├── lib/           # Utility functions
-│   │   │   └── types/         # TypeScript type definitions
-│   │   ├── public/            # Static assets
+│   │   │   ├── app/          # App Router pages
+│   │   │   ├── components/   # React components
+│   │   │   ├── lib/          # Utility functions
+│   │   │   └── types/        # Local TypeScript defs
+│   │   ├── public/           # Static assets
 │   │   ├── package.json
 │   │   ├── next.config.ts
 │   │   ├── tailwind.config.ts
 │   │   └── tsconfig.json
-│   └── shared/                # Shared types and utilities
+│   └── shared/               # Shared types & utilities
 │       ├── src/
-│       │   ├── types/         # Shared TypeScript interfaces
-│       │   └── utils/         # Shared utility functions
-│       ├── dist/              # Compiled output
+│       │   ├── types/        # Shared TS interfaces
+│       │   └── utils/        # Shared helper funcs
+│       ├── dist/             # Compiled output
 │       ├── package.json
 │       └── tsconfig.json
-├── services/                  # Backend services
-│   ├── api/                   # NestJS backend API
+├── services/                 # Backend services
+│   ├── api/                  # NestJS backend API
 │   │   ├── src/
-│   │   │   ├── modules/       # Feature modules
-│   │   │   ├── common/        # Shared services and utilities
-│   │   │   ├── config/        # Configuration files
-│   │   │   └── main.ts        # Application entry point
-│   │   ├── test/              # Test files
+│   │   │   ├── modules/      # Feature modules
+│   │   │   ├── common/       # Shared services & utils
+│   │   │   ├── config/       # Config files
+│   │   │   └── main.ts       # Application entry
+│   │   ├── test/             # Test files
 │   │   ├── package.json
 │   │   ├── nest-cli.json
 │   │   └── tsconfig.json
-│   └── ml-service/            # Python ML service (future implementation)
+│   └── ml-service/           # Python ML service (future)
 │       ├── src/
 │       ├── requirements.txt
 │       └── Dockerfile
-├── .env.example               # Environment variables template
-├── .gitignore                 # Git ignore rules
-├── docker-compose.yml         # Docker services configuration
-├── package.json               # Monorepo configuration
-├── README.md                  # Project documentation
-└── yarn.lock                  # Dependency lock file
-</details>
+├── .env.example              # Environment variables template
+├── .gitignore                # Git ignore rules
+├── docker-compose.yml        # Docker services configuration
+├── package.json              # Monorepo root config
+├── README.md                 # Project documentation
+└── yarn.lock                 # Dependency lock file
 ```
+
+</details>
 
 ## 🎯 Features
 
