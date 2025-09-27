@@ -62,5 +62,7 @@ env/
 .vercel
 .turbo
 
+rules.txt
 task.txt
 plans.txt
+status.txt
