@@ -39,8 +39,6 @@ innuendo/
 ├── docs/                     # Project documentation
 │   ├── architecture/         # System design & architecture docs
 │   │   ├── system-design.md
-│   │   ├── database-schema.md
-│   │   └── api-design.md
 │   ├── development/          # Development setup & guidelines
 │   │   ├── setup.md
 │   │   ├── contributing.md
