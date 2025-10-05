@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { Card } from "../ui/Card";
-import { CreateNoteDto } from "@/lib/types";
+import { CreateNoteDto } from "@innuendo/shared";
 
 interface CreateNoteFormProps {
   onSubmit: (data: CreateNoteDto) => Promise<void>;

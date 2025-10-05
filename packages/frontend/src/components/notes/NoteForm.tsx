@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { Note, CreateNoteDto, UpdateNoteDto } from "@/lib/types";
+import type { Note, CreateNoteDto, UpdateNoteDto } from "@innuendo/shared";
 
 // Схема валидации
 const noteSchema = z.object({

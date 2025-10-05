@@ -1,6 +1,6 @@
 import { Note } from "@innuendo/shared";
 import { NoteCard } from "./NoteCard";
-import { LoadingSpinner } from "../ui/LoadingSpinner";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 interface NoteListProps {
   notes: Note[];

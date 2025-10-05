@@ -1,4 +1,4 @@
-import { Note } from "@/lib/types";
+import { Note } from "@innuendo/shared";
 import { cn, formatDate } from "@/lib/utils";
 import { ChevronDown, ChevronUp, Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
