@@ -28,3 +28,7 @@ export interface ApiResponse<T> {
   error?: string;
   loading: boolean;
 }
+
+export interface FormErrors {
+  [key: string]: string;
+}

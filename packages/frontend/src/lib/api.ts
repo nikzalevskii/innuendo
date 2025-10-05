@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CreateNoteDto, Note, UpdateNoteDto } from "./types";
+import { CreateNoteDto, Note, UpdateNoteDto } from "@innuendo/shared";
 
 const API_BASE_URL = "http://localhost:3001/api";
 
