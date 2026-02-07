@@ -6,7 +6,6 @@ import { NoteList } from "@/components/notes/NoteList";
 import { CreateNoteForm } from "@/components/notes/CreateNoteForm";
 import { useNotes } from "@/hooks/useNotes";
 import { useApiHealth } from "@/hooks/useApiHealth";
-import { da } from "zod/locales";
 import { ErrorAlert } from "@/components/ui/ErrorAlert";
 
 export default function NotesPage() {
