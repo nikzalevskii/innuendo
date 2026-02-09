@@ -1,42 +1,50 @@
-"use client";
+'use client'
 
-import { useEffect } from "react";
-import { CreateNoteDto } from "@innuendo/shared";
-import { NoteList } from "@/components/notes/NoteList";
-import { CreateNoteForm } from "@/components/notes/CreateNoteForm";
-import { useNotes } from "@/hooks/useNotes";
-import { useApiHealth } from "@/hooks/useApiHealth";
-import { ErrorAlert } from "@/components/ui/ErrorAlert";
+import { useEffect, useState } from 'react'
+import { CreateNoteDto, Note, UpdateNoteDto } from '@innuendo/shared'
+import { NoteList } from '@/components/notes/NoteList'
+import { CreateNoteForm } from '@/components/notes/CreateNoteForm'
+import { useNotes } from '@/hooks/useNotes'
+import { useApiHealth } from '@/hooks/useApiHealth'
+import { ErrorAlert } from '@/components/ui/ErrorAlert'
+import { EditNoteModal } from '@/components/notes/EditNoteModal'
 
 export default function NotesPage() {
-  const {
-    notes,
-    isLoading,
-    error,
-    fetchNotes,
-    createNote,
-    updateNote,
-    deleteNote,
-  } = useNotes();
+  const { notes, isLoading, error, fetchNotes, createNote, updateNote, deleteNote } = useNotes()
 
-  const { isHealthy } = useApiHealth();
+  const { isHealthy } = useApiHealth()
+
+  const [editingNote, setEditingNote] = useState<Note | null>(null)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
   useEffect(() => {
-    fetchNotes();
-  }, [fetchNotes]);
+    fetchNotes()
+  }, [fetchNotes])
 
   const handleCreateNote = async (data: CreateNoteDto) => {
-    await createNote(data);
-  };
+    await createNote(data)
+  }
 
   const handleEditNote = (id: string) => {
-    // Логика открытия модального окна редактирования
-    console.log("Edit:", id);
-  };
+    const note = notes.find((n) => n.id === id)
+    if (note) {
+      setEditingNote(note)
+      setIsEditModalOpen(true)
+    }
+  }
+
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false)
+    setEditingNote(null)
+  }
+
+  const handleUpdateNote = async (id: string, data: UpdateNoteDto) => {
+    return await updateNote(id, data)
+  }
 
   const handleDeleteNote = async (id: string) => {
-    await deleteNote(id);
-  };
+    await deleteNote(id)
+  }
 
   if (isHealthy === false) {
     return (
@@ -45,7 +53,7 @@ export default function NotesPage() {
           <p>API сервер недоступен. Пожалуйста, проверьте подключение.</p>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -55,12 +63,20 @@ export default function NotesPage() {
       {error && <ErrorAlert message={error} onRetry={fetchNotes} />}
 
       <CreateNoteForm onSubmit={handleCreateNote} />
+
       <NoteList
         notes={notes}
         isLoading={isLoading}
         onEditNote={handleEditNote}
         onDeleteNote={handleDeleteNote}
       />
+
+      <EditNoteModal
+        note={editingNote}
+        isOpen={isEditModalOpen}
+        onClose={handleCloseEditModal}
+        onSubmit={handleUpdateNote}
+      />
     </div>
-  );
+  )
 }
