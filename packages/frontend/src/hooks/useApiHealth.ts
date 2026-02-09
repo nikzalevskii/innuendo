@@ -1,25 +1,27 @@
-import { useState, useEffect } from "react";
-import { checkApiHealth } from "@/lib/api";
+import { useState, useEffect, useCallback } from 'react'
+import { checkApiHealth } from '@/lib/api'
 
 export function useApiHealth() {
-  const [isHealthy, setIsHealthy] = useState<boolean | null>(null);
-  const [isChecking, setIsChecking] = useState(false);
+  const [isHealthy, setIsHealthy] = useState<boolean | null>(null)
+  const [isChecking, setIsChecking] = useState(false)
 
-  const checkHealth = async () => {
-    setIsChecking(true);
+  const checkHealth = useCallback(async () => {
+    setIsChecking(true)
     try {
-      const healthy = await checkApiHealth();
-      setIsHealthy(healthy);
+      const healthy = await checkApiHealth()
+      setIsHealthy(healthy)
+      return healthy
     } catch (error) {
-      setIsHealthy(false);
+      setIsHealthy(false)
+      return false
     } finally {
-      setIsChecking(false);
+      setIsChecking(false)
     }
-  };
+  }, [])
 
   useEffect(() => {
-    checkHealth();
-  }, []);
+    checkHealth()
+  }, [checkHealth])
 
-  return { isHealthy, isChecking, checkHealth };
+  return { isHealthy, isChecking, checkHealth }
 }
