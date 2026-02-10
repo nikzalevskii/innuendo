@@ -1,45 +1,45 @@
-import { useState } from "react";
-import { Button } from "../ui/Button";
-import { Input } from "../ui/Input";
-import { Card } from "../ui/Card";
-import { CreateNoteDto } from "@innuendo/shared";
+import { useState } from 'react'
+import { Button } from '../../ui/Button'
+import { Input } from '../../ui/Input'
+import { Card } from '../../ui/Card'
+import { CreateNoteDto } from '@innuendo/shared'
 
 interface CreateNoteFormProps {
-  onSubmit: (data: CreateNoteDto) => Promise<void>;
-  onCancel?: () => void;
+  onSubmit: (data: CreateNoteDto) => Promise<void>
+  onCancel?: () => void
 }
 
 export function CreateNoteForm({ onSubmit, onCancel }: CreateNoteFormProps) {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState<{ title?: string }>({});
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errors, setErrors] = useState<{ title?: string }>({})
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrors({});
+    e.preventDefault()
+    setErrors({})
 
     if (!title.trim()) {
-      setErrors({ title: "Заголовок обязателен" });
-      return;
+      setErrors({ title: 'Заголовок обязателен' })
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
     try {
       await onSubmit({
         title: title.trim(),
         content: content.trim() || undefined,
-      });
+      })
 
       // Очистить форму после успешного создания
-      setTitle("");
-      setContent("");
+      setTitle('')
+      setContent('')
     } catch (error) {
-      console.error("Error creating note:", error);
+      console.error('Error creating note:', error)
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
     <Card className="mb-6">
@@ -56,9 +56,7 @@ export function CreateNoteForm({ onSubmit, onCancel }: CreateNoteFormProps) {
         />
 
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Содержание
-          </label>
+          <label className="block text-sm font-medium text-gray-700">Содержание</label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -82,5 +80,5 @@ export function CreateNoteForm({ onSubmit, onCancel }: CreateNoteFormProps) {
         </div>
       </form>
     </Card>
-  );
+  )
 }
