@@ -1,4 +1,4 @@
-# 🧠 Innuendo - Multimodal Personal Knowledge Graph
+# Innuendo - Multimodal Personal Knowledge Graph
 
 AI-powered personal knowledge management system that transforms notes, voice recordings, and images into a searchable, interconnected knowledge graph.
 
