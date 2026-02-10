@@ -1,6 +1,16 @@
 import { Note } from '@innuendo/shared'
 import { cn, formatDate } from '@/lib/utils'
-import { ChevronDown, ChevronUp, Pencil, Trash2 } from 'lucide-react'
+import {
+  AlertCircle,
+  CheckCircle,
+  ChevronDown,
+  ChevronUp,
+  Clock,
+  FileAudio,
+  FileImage,
+  Pencil,
+  Trash2,
+} from 'lucide-react'
 import { useState } from 'react'
 import { useI18N } from '@/hooks/useI18N'
 import locales from './index.i18n.json'
@@ -9,6 +19,30 @@ interface Props {
   note: Note
   onEdit: (id: string) => void
   onDelete: (id: string) => void
+}
+
+const StatusIcon = ({ status }: { status: string }) => {
+  switch (status) {
+    case 'PROCESSING':
+      return <Clock className="w-4 h-4 text-yellow-500 animate-pulse" />
+    case 'READY':
+      return <CheckCircle className="w-4 h-4 text-green-500" />
+    case 'FAILED':
+      return <AlertCircle className="w-4 h-4 text-red-500" />
+    default:
+      return null
+  }
+}
+
+const SourceIcon = ({ sourceType }: { sourceType: string }) => {
+  switch (sourceType) {
+    case 'AUDIO':
+      return <FileAudio className="w-4 h-4 text-purple-500" />
+    case 'IMAGE':
+      return <FileImage className="w-4 h-4 text-green-500" />
+    default:
+      return null
+  }
 }
 
 export const NoteCard = ({ note, onEdit, onDelete }: Props) => {
@@ -41,6 +75,19 @@ export const NoteCard = ({ note, onEdit, onDelete }: Props) => {
       </div>
 
       <div className="text-sm text-gray-500 mb-3">{formatDate(note.createdAt, language)}</div>
+
+      {note.sourceType !== 'TEXT' && (
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+          <SourceIcon sourceType={note.sourceType} />
+          <StatusIcon status={note.status} />
+          {note.status === 'PROCESSING' && (
+            <span className="text-yellow-600">{t('processing')}</span>
+          )}
+          {note.status === 'FAILED' && (
+            <span className="text-red-600">{t('processingFailed')}</span>
+          )}
+        </div>
+      )}
 
       {note.content && (
         <div className="mb-3">

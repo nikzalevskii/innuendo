@@ -3,12 +3,16 @@
     "editAriaLabel": "Редактировать заметку",
     "deleteAriaLabel": "Удалить заметку",
     "collapse": "Свернуть",
-    "expand": "Развернуть"
+    "expand": "Развернуть",
+    "processing": "Обработка...",
+    "processingFailed": "Ошибка обработки"
   },
   "en": {
     "editAriaLabel": "Edit note",
     "deleteAriaLabel": "Delete note",
     "collapse": "Collapse",
-    "expand": "Expand"
+    "expand": "Expand",
+    "processing": "Processing...",
+    "processingFailed": "Processing failed"
   }
 }
