@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const NoteCard = ({ note, onEdit, onDelete }: Props) => {
-  const { t } = useI18N(locales)
+  const { t, language } = useI18N(locales)
   const [expanded, setExpanded] = useState(false)
 
   const toggleExpand = () => setExpanded((prev) => !prev)
@@ -40,7 +40,7 @@ export const NoteCard = ({ note, onEdit, onDelete }: Props) => {
         </div>
       </div>
 
-      <div className="text-sm text-gray-500 mb-3">{formatDate(note.createdAt)}</div>
+      <div className="text-sm text-gray-500 mb-3">{formatDate(note.createdAt, language)}</div>
 
       {note.content && (
         <div className="mb-3">

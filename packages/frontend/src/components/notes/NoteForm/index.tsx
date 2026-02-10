@@ -29,7 +29,7 @@ export function NoteForm({ note, onSubmit, onCancel, isSubmitting = false }: Not
         title: z.string().min(1, t('titleRequired')).max(100, t('titleMaxLength')),
         content: z.string().optional(),
       }),
-    [],
+    [t],
   )
   const {
     register,
@@ -102,7 +102,7 @@ export function NoteForm({ note, onSubmit, onCancel, isSubmitting = false }: Not
           className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
           disabled={isSubmitting}
         >
-          Отмена
+          {t('cancel')}
         </button>
         <button
           type="submit"
