@@ -2,8 +2,12 @@ import { notesApi } from '@/lib/api'
 import { CreateNoteDto, Note, UpdateNoteDto } from '@innuendo/shared'
 import { useCallback, useState } from 'react'
 import { toast } from 'sonner'
+import { useI18N } from '@/hooks/useI18N'
+import locales from './index.i18n.json'
 
 export const useNotes = () => {
+  const { t } = useI18N(locales)
+
   const [notes, setNotes] = useState<Note[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -16,7 +20,7 @@ export const useNotes = () => {
       setNotes(data)
       return data
     } catch (err) {
-      const errorMsg = 'Не удалось загрузить заметки'
+      const errorMsg = t('fetchError')
       setError(errorMsg)
       toast.error(errorMsg)
       console.error(err)
@@ -31,10 +35,10 @@ export const useNotes = () => {
     try {
       const newNote = await notesApi.create(data)
       setNotes((prev) => [newNote, ...prev])
-      toast.success('Заметка создана')
+      toast.success(t('createSuccess'))
       return newNote
     } catch (err) {
-      const errorMsg = 'Не удалось создать заметку'
+      const errorMsg = t('createError')
       setError(errorMsg)
       toast.error(errorMsg)
       console.error(err)
@@ -50,10 +54,10 @@ export const useNotes = () => {
     try {
       const updatedNote = await notesApi.update(id, data)
       setNotes((prev) => prev.map((note) => (note.id === id ? updatedNote : note)))
-      toast.success('Заметка обновлена')
+      toast.success(t('updateSuccess'))
       return updatedNote
     } catch (err) {
-      const errorMsg = 'Не удалось обновить заметку'
+      const errorMsg = t('updateError')
       setError(errorMsg)
       toast.error(errorMsg)
       console.error(err)
@@ -71,11 +75,11 @@ export const useNotes = () => {
       try {
         await notesApi.delete(id)
         setNotes((prev) => prev.filter((note) => note.id !== id))
-        toast.success('Заметка удалена')
+        toast.success(t('deleteSuccess'))
         return true
       } catch (err) {
         setNotes(previousNotes)
-        const errorMsg = 'Не удалось удалить заметку'
+        const errorMsg = t('deleteError')
         setError(errorMsg)
         toast.error(errorMsg)
         console.error(err)

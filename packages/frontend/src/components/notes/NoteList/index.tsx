@@ -1,6 +1,8 @@
 import { Note } from '@innuendo/shared'
-import { NoteCard } from '../NoteCard'
+import { NoteCard } from '@/components/notes/NoteCard'
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner'
+import { useI18N } from '@/hooks/useI18N'
+import locales from './index.i18n.json'
 
 interface NoteListProps {
   notes: Note[]
@@ -10,6 +12,8 @@ interface NoteListProps {
 }
 
 export function NoteList({ notes, isLoading, onEditNote, onDeleteNote }: NoteListProps) {
+  const { t } = useI18N(locales)
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-8">
@@ -21,8 +25,8 @@ export function NoteList({ notes, isLoading, onEditNote, onDeleteNote }: NoteLis
   if (notes.length === 0) {
     return (
       <div className="text-center py-8 text-gray-500">
-        <p>Заметок пока нет</p>
-        <p className="text-sm">Создайте первую заметку!</p>
+        <p>{t('emptyTitle')}</p>
+        <p className="text-sm">{t('emptyHint')}</p>
       </div>
     )
   }

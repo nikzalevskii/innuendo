@@ -8,8 +8,11 @@ import { useNotes } from '@/hooks/useNotes'
 import { useApiHealth } from '@/hooks/useApiHealth'
 import { ErrorAlert } from '@/components/ui/ErrorAlert'
 import { EditNoteModal } from '@/components/notes/EditNoteModal'
+import { useI18N } from '@/hooks/useI18N'
+import locales from './index.i18n.json'
 
 export default function NotesPage() {
+  const { t } = useI18N(locales)
   const { notes, isLoading, error, fetchNotes, createNote, updateNote, deleteNote } = useNotes()
 
   const { isHealthy } = useApiHealth()
@@ -50,7 +53,7 @@ export default function NotesPage() {
     return (
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-          <p>API сервер недоступен. Пожалуйста, проверьте подключение.</p>
+          <p>{t('apiUnavailable')}</p>
         </div>
       </div>
     )
@@ -58,7 +61,7 @@ export default function NotesPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-8">Мои заметки</h1>
+      <h1 className="text-3xl font-bold mb-8">{t('title')}</h1>
 
       {error && <ErrorAlert message={error} onRetry={fetchNotes} />}
 

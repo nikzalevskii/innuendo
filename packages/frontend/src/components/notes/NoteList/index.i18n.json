@@ -1,0 +1,10 @@
+{
+  "ru": {
+    "emptyTitle": "Заметок пока нет",
+    "emptyHint": "Создайте первую заметку!"
+  },
+  "en": {
+    "emptyTitle": "No notes yet",
+    "emptyHint": "Create your first note!"
+  }
+}

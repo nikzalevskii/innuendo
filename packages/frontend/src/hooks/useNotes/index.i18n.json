@@ -1,0 +1,20 @@
+{
+  "ru": {
+    "fetchError": "Не удалось загрузить заметки",
+    "createSuccess": "Заметка создана",
+    "createError": "Не удалось создать заметку",
+    "updateSuccess": "Заметка обновлена",
+    "updateError": "Не удалось обновить заметку",
+    "deleteSuccess": "Заметка удалена",
+    "deleteError": "Не удалось удалить заметку"
+  },
+  "en": {
+    "fetchError": "Failed to load notes",
+    "createSuccess": "Note created",
+    "createError": "Failed to create note",
+    "updateSuccess": "Note updated",
+    "updateError": "Failed to update note",
+    "deleteSuccess": "Note deleted",
+    "deleteError": "Failed to delete note"
+  }
+}

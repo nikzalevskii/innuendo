@@ -1,6 +1,8 @@
 import { cn } from '@/lib/utils'
 import { X } from 'lucide-react'
 import { ReactNode, useEffect } from 'react'
+import { useI18N } from '@/hooks/useI18N'
+import locales from './index.i18n.json'
 
 interface Props {
   isOpen: boolean
@@ -11,6 +13,8 @@ interface Props {
 }
 
 export const Modal = ({ isOpen, onClose, children, title, className }: Props) => {
+  const { t } = useI18N(locales)
+
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -60,7 +64,7 @@ export const Modal = ({ isOpen, onClose, children, title, className }: Props) =>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-lg hover:bg-gray-100"
-              aria-label="Закрыть"
+              aria-label={t('closeAriaLabel')}
             >
               <X size={24} />
             </button>

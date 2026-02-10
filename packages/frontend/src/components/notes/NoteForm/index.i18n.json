@@ -1,0 +1,32 @@
+{
+  "ru": {
+    "editTitle": "Редактировать заметку",
+    "createTitle": "Создать заметку",
+    "closeAriaLabel": "Закрыть",
+    "titleLabel": "Заголовок",
+    "contentLabel": "Содержание",
+    "titlePlaceholder": "Введите заголовок заметки",
+    "contentPlaceholder": "Введите содержание заметки",
+    "cancel": "Отмена",
+    "saving": "Сохранение...",
+    "save": "Сохранить",
+    "create": "Создать",
+    "titleRequired": "Заголовок обязателен",
+    "titleMaxLength": "Максимум 100 символов"
+  },
+  "en": {
+    "editTitle": "Edit Note",
+    "createTitle": "Create Note",
+    "closeAriaLabel": "Close",
+    "titleLabel": "Title",
+    "contentLabel": "Content",
+    "titlePlaceholder": "Enter note title",
+    "contentPlaceholder": "Enter note content",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "save": "Save",
+    "create": "Create",
+    "titleRequired": "Title is required",
+    "titleMaxLength": "Maximum 100 characters"
+  }
+}

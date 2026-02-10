@@ -1,18 +1,21 @@
-import { Note } from "@innuendo/shared";
-import { cn, formatDate } from "@/lib/utils";
-import { ChevronDown, ChevronUp, Pencil, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { Note } from '@innuendo/shared'
+import { cn, formatDate } from '@/lib/utils'
+import { ChevronDown, ChevronUp, Pencil, Trash2 } from 'lucide-react'
+import { useState } from 'react'
+import { useI18N } from '@/hooks/useI18N'
+import locales from './index.i18n.json'
 
 interface Props {
-  note: Note;
-  onEdit: (id: string) => void;
-  onDelete: (id: string) => void;
+  note: Note
+  onEdit: (id: string) => void
+  onDelete: (id: string) => void
 }
 
 export const NoteCard = ({ note, onEdit, onDelete }: Props) => {
-  const [expanded, setExpanded] = useState(false);
+  const { t } = useI18N(locales)
+  const [expanded, setExpanded] = useState(false)
 
-  const toggleExpand = () => setExpanded((prev) => !prev);
+  const toggleExpand = () => setExpanded((prev) => !prev)
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mb-4 border border-gray-200 hover:border-primary-300 transition-all">
@@ -23,32 +26,25 @@ export const NoteCard = ({ note, onEdit, onDelete }: Props) => {
           <button
             onClick={() => onEdit(note.id)}
             className="text-gray-500 hover:text-primary-500"
-            aria-label="Редактировать заметку"
+            aria-label={t('editAriaLabel')}
           >
             <Pencil size={18} />
           </button>
           <button
             onClick={() => onDelete(note.id)}
             className="text-gray-500 hover:text-red-500"
-            aria-label="Удалить заметку"
+            aria-label={t('deleteAriaLabel')}
           >
             <Trash2 size={18} />
           </button>
         </div>
       </div>
 
-      <div className="text-sm text-gray-500 mb-3">
-        {formatDate(note.createdAt)}
-      </div>
+      <div className="text-sm text-gray-500 mb-3">{formatDate(note.createdAt)}</div>
 
       {note.content && (
         <div className="mb-3">
-          <div
-            className={cn(
-              "text-gray-700 prose-sm",
-              !expanded && "line-clamp-3"
-            )}
-          >
+          <div className={cn('text-gray-700 prose-sm', !expanded && 'line-clamp-3')}>
             {note.content}
           </div>
 
@@ -59,11 +55,11 @@ export const NoteCard = ({ note, onEdit, onDelete }: Props) => {
             >
               {expanded ? (
                 <>
-                  Свернуть <ChevronUp size={16} className="ml-1" />
+                  {t('collapse')} <ChevronUp size={16} className="ml-1" />
                 </>
               ) : (
                 <>
-                  Развернуть <ChevronDown size={16} className="ml-1" />
+                  {t('expand')} <ChevronDown size={16} className="ml-1" />
                 </>
               )}
             </button>
@@ -77,7 +73,7 @@ export const NoteCard = ({ note, onEdit, onDelete }: Props) => {
             <span
               key={tag.id}
               className="px-2 py-1 text-xs rounded-full"
-              style={{ backgroundColor: tag.color, color: "#fff" }}
+              style={{ backgroundColor: tag.color, color: '#fff' }}
             >
               {tag.name}
             </span>
@@ -85,5 +81,5 @@ export const NoteCard = ({ note, onEdit, onDelete }: Props) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}

@@ -1,0 +1,10 @@
+{
+  "ru": {
+    "title": "Мои заметки",
+    "apiUnavailable": "API сервер недоступен. Пожалуйста, проверьте подключение."
+  },
+  "en": {
+    "title": "My Notes",
+    "apiUnavailable": "API server is unavailable. Please check your connection."
+  }
+}

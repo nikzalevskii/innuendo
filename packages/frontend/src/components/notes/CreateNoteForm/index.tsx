@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { Button } from '../../ui/Button'
-import { Input } from '../../ui/Input'
-import { Card } from '../../ui/Card'
+import { Button } from '@/components/ui/Button'
+import { Input } from '@/components/ui/Input'
+import { Card } from '@/components/ui/Card'
 import { CreateNoteDto } from '@innuendo/shared'
+import { useI18N } from '@/hooks/useI18N'
+import locales from './index.i18n.json'
 
 interface CreateNoteFormProps {
   onSubmit: (data: CreateNoteDto) => Promise<void>
@@ -10,6 +12,7 @@ interface CreateNoteFormProps {
 }
 
 export function CreateNoteForm({ onSubmit, onCancel }: CreateNoteFormProps) {
+  const { t } = useI18N(locales)
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -20,7 +23,7 @@ export function CreateNoteForm({ onSubmit, onCancel }: CreateNoteFormProps) {
     setErrors({})
 
     if (!title.trim()) {
-      setErrors({ title: 'Заголовок обязателен' })
+      setErrors({ title: t('titleRequired') })
       return
     }
 
@@ -31,7 +34,6 @@ export function CreateNoteForm({ onSubmit, onCancel }: CreateNoteFormProps) {
         content: content.trim() || undefined,
       })
 
-      // Очистить форму после успешного создания
       setTitle('')
       setContent('')
     } catch (error) {
@@ -44,19 +46,19 @@ export function CreateNoteForm({ onSubmit, onCancel }: CreateNoteFormProps) {
   return (
     <Card className="mb-6">
       <form onSubmit={handleSubmit} className="space-y-4">
-        <h2 className="text-lg font-semibold text-gray-900">Создать заметку</h2>
+        <h2 className="text-lg font-semibold text-gray-900">{t('heading')}</h2>
 
         <Input
-          label="Заголовок"
+          label={t('titleLabel')}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Введите заголовок заметки"
+          placeholder={t('titlePlaceholder')}
           error={errors.title}
           required
         />
 
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">Содержание</label>
+          <label className="block text-sm font-medium text-gray-700">{t('contentLabel')}</label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -64,17 +66,17 @@ export function CreateNoteForm({ onSubmit, onCancel }: CreateNoteFormProps) {
             className="w-full rounded-md border border-gray-300 px-3 py-2
    text-sm focus:outline-none focus:ring-2 focus:ring-blue-500
   focus:border-transparent"
-            placeholder="Введите содержание заметки"
+            placeholder={t('contentPlaceholder')}
           />
         </div>
 
         <div className="flex gap-3">
           <Button type="submit" isLoading={isSubmitting}>
-            Создать заметку
+            {t('submitButton')}
           </Button>
           {onCancel && (
             <Button type="button" variant="secondary" onClick={onCancel}>
-              Отмена
+              {t('cancelButton')}
             </Button>
           )}
         </div>

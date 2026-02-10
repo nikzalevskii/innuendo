@@ -1,0 +1,22 @@
+{
+  "ru": {
+    "heading": "Создать заметку",
+    "titleLabel": "Заголовок",
+    "contentLabel": "Содержание",
+    "titlePlaceholder": "Введите заголовок заметки",
+    "contentPlaceholder": "Введите содержание заметки",
+    "titleRequired": "Заголовок обязателен",
+    "submitButton": "Создать заметку",
+    "cancelButton": "Отмена"
+  },
+  "en": {
+    "heading": "Create Note",
+    "titleLabel": "Title",
+    "contentLabel": "Content",
+    "titlePlaceholder": "Enter note title",
+    "contentPlaceholder": "Enter note content",
+    "titleRequired": "Title is required",
+    "submitButton": "Create Note",
+    "cancelButton": "Cancel"
+  }
+}

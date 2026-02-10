@@ -1,0 +1,14 @@
+{
+  "ru": {
+    "editAriaLabel": "Редактировать заметку",
+    "deleteAriaLabel": "Удалить заметку",
+    "collapse": "Свернуть",
+    "expand": "Развернуть"
+  },
+  "en": {
+    "editAriaLabel": "Edit note",
+    "deleteAriaLabel": "Delete note",
+    "collapse": "Collapse",
+    "expand": "Expand"
+  }
+}
