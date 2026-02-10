@@ -16,9 +16,9 @@ export const useNotes = () => {
     setIsLoading(true)
     setError(null)
     try {
-      const data = await notesApi.getAll()
-      setNotes(data)
-      return data
+      const response = await notesApi.getAll()
+      setNotes(response.data)
+      return response.data
     } catch (err) {
       const errorMsg = t('fetchError')
       setError(errorMsg)

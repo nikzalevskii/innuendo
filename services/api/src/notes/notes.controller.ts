@@ -8,10 +8,12 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import { NoteStatus, SourceType } from '@prisma/client';
 
 @Controller('api/notes')
 export class NotesController {
@@ -24,8 +26,18 @@ export class NotesController {
   }
 
   @Get()
-  findAll() {
-    return this.notesService.findAll();
+  findAll(
+    @Query('status') status?: NoteStatus,
+    @Query('sourceType') sourceType?: SourceType,
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+  ) {
+    return this.notesService.findAll({
+      status,
+      sourceType,
+      page: page ? parseInt(page, 10) : undefined,
+      limit: limit ? parseInt(limit, 10) : undefined,
+    });
   }
 
   @Get(':id')

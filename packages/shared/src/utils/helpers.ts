@@ -14,12 +14,14 @@ export function formatDate(date: Date | string): string {
 export function createMockNote(
   id: string,
   title: string,
-  content?: string
+  content?: string,
 ): Note {
   return {
     id,
     title,
-    content,
+    content: content ?? "",
+    sourceType: "TEXT",
+    status: "READY",
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     tags: [],

@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
+import { SourceType } from '@prisma/client';
+import { IsString, IsNotEmpty, IsOptional, IsEnum } from 'class-validator';
 
 export class CreateNoteDto {
   @IsString()
@@ -8,4 +9,8 @@ export class CreateNoteDto {
   @IsString()
   @IsOptional()
   content: string;
+
+  @IsEnum(SourceType)
+  @IsOptional()
+  sourceType?: SourceType;
 }
