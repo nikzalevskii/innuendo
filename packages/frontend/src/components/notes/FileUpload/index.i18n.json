@@ -1,0 +1,32 @@
+{
+  "ru": {
+    "unsupportedFileType": "Неподдерживаемый тип файла: {{fileType}}",
+    "fileTooLarge": "Файл слишком большой. Максимум: {{maxSize}} МБ",
+    "loadFile": "Загрузить файл",
+    "dragOrSelect": "Перетащите файл сюда или",
+    "select": "выберите",
+    "supportedFormats": "Поддерживаются: MP3, WAV, M4A, OGG, WEBM, JPG, PNG, WEBP, GIF",
+    "maxFileSize": "Максимум: 50MB",
+    "titleLabel": "Название (опционально)",
+    "titlePlaceholder": "Введите название заметки",
+    "uploading": "Загрузка...",
+    "upload": "Загрузить",
+    "cancel": "Отмена",
+    "uploadError": "Ошибка загрузки файла"
+  },
+  "en": {
+    "unsupportedFileType": "Unsupported file type: {{fileType}}",
+    "fileTooLarge": "File is too large. Maximum: {{maxSize}} MB",
+    "loadFile": "Load File",
+    "dragOrSelect": "Drag file here or",
+    "select": "select",
+    "supportedFormats": "Supported: MP3, WAV, M4A, OGG, WEBM, JPG, PNG, WEBP, GIF",
+    "maxFileSize": "Maximum: 50MB",
+    "titleLabel": "Title (optional)",
+    "titlePlaceholder": "Enter note title",
+    "uploading": "Uploading...",
+    "upload": "Upload",
+    "cancel": "Cancel",
+    "uploadError": "Error uploading file"
+  }
+}
