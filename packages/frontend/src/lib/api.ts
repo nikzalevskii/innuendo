@@ -8,7 +8,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 5000,
+  timeout: 30000,
 })
 
 api.interceptors.response.use(
@@ -42,6 +42,23 @@ export const notesApi = {
 
   delete: async (id: string): Promise<void> => {
     await api.delete(`/notes/${id}`)
+  },
+
+  upload: async (file: File, title?: string): Promise<Note> => {
+    const formData = new FormData()
+    formData.append('file', file)
+    if (title) {
+      formData.append('title', title)
+    }
+
+    const response = await api.post('/notes/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      timeout: 120000,
+    })
+
+    return response.data.note
   },
 }
 
