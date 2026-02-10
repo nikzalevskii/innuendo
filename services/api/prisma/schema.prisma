@@ -13,16 +13,70 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Note {
-  id        String   @id @default(uuid())
-  title     String
-  content   String
+enum SourceType {
+  TEXT
+  AUDIO
+  IMAGE
+}
+
+enum NoteStatus {
+  PROCESSING // ML-сервис ещё обрабатывает файл
+  READY      // Заметка готова к использованию
+  FAILED     // Обработка завершилась с ошибкой
+}
+
+enum EntityType {
+  PERSON      // Человек: "Иван Петров", "Илон Маск"
+  ORG         // Организация: "Google", "МГУ", "Сбербанк"
+  LOC         // Локация: "Москва", "Кремль", "Россия"
+  DATE        // Дата: "15 января", "2025 год", "вчера"
+  EVENT       // Событие: "Новый год", "конференция GoTo"
+  PRODUCT     // Продукт: "iPhone", "ChatGPT", "Tesla Model 3"
+  CONCEPT     // Концепция: "машинное обучение", "квантовые вычисления"
+  OTHER       // Всё, что не попало в другие категории
+}
+
+
+
+model User {
+  id        String @id @default(uuid())
+  email     String @unique
+  password  String
+  name      String?
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+  notes     Note[]
+  @@map("users")
+}
 
-  tags      Tag[] @relation("NoteToTag")
-  embeddings Embedding?
+model Note {
+  id         String      @id @default(uuid())
+  title      String
+  content    String      @default("")
 
+  sourceType SourceType  @default(TEXT) @map("source_type")
+  filePath   String?     @map("file_path")
+  mimeType   String?     @map("mime_type")
+  fileSize   Int?        @map("file_size")
+
+  status     NoteStatus  @default(READY)
+
+  metadata   Json?
+
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @updatedAt @map("updated_at")
+
+  userId     String?     @map("user_id")
+  user       User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  tags       Tag[] @relation("NoteToTag")
+  embedding  Embedding?
+  entities   Entity[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([sourceType])
+  @@index([createdAt(sort: Desc)])
   @@map("notes")
 }
 
@@ -30,6 +84,7 @@ model Tag {
   id        String   @id @default(uuid())
   name      String @unique
   color     String @default("#3b82f6")
+  createdAt DateTime @default(now()) @map("created_at")
 
   notes Note[] @relation("NoteToTag")
 
@@ -39,9 +94,30 @@ model Tag {
 model Embedding {
   id        String @id @default(uuid())
   vector    Float[]
-  noteId    String @unique @map("note_id")
+  model     String   @default("all-MiniLM-L6-v2")
+  dimension Int      @default(384)
+  createdAt DateTime @default(now()) @map("created_at")
 
+  noteId    String @unique @map("note_id")
   note Note @relation(fields: [noteId], references: [id], onDelete: Cascade)
 
   @@map("embeddings")
+}
+
+model Entity {
+  id         String     @id @default(uuid())
+  text       String
+  type       EntityType
+  startPos   Int?       @map("start_pos")
+  endPos     Int?       @map("end_pos")
+  confidence Float?
+  createdAt  DateTime   @default(now()) @map("created_at")
+
+  noteId     String     @map("note_id")
+  note       Note       @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  @@index([noteId])
+  @@index([type])
+  @@index([text])
+  @@map("entities")
 }
