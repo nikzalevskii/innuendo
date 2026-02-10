@@ -1,10 +1,12 @@
 {
   "ru": {
     "title": "Мои заметки",
-    "apiUnavailable": "API сервер недоступен. Пожалуйста, проверьте подключение."
+    "apiUnavailable": "API сервер недоступен. Пожалуйста, проверьте подключение.",
+    "fileUploaded": "Файл загружен, обработка началась"
   },
   "en": {
     "title": "My Notes",
-    "apiUnavailable": "API server is unavailable. Please check your connection."
+    "apiUnavailable": "API server is unavailable. Please check your connection.",
+    "fileUploaded": "File uploaded, processing started"
   }
 }

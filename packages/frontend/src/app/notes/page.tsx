@@ -10,6 +10,8 @@ import { ErrorAlert } from '@/components/ui/ErrorAlert'
 import { EditNoteModal } from '@/components/notes/EditNoteModal'
 import { useI18N } from '@/hooks/useI18N'
 import locales from './index.i18n.json'
+import { toast } from 'sonner'
+import { FileUpload } from '@/components/notes/FileUpload'
 
 export default function NotesPage() {
   const { t } = useI18N(locales)
@@ -62,10 +64,16 @@ export default function NotesPage() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <h1 className="text-3xl font-bold mb-8">{t('title')}</h1>
-
       {error && <ErrorAlert message={error} onRetry={fetchNotes} />}
-
       <CreateNoteForm onSubmit={handleCreateNote} />
+
+      <FileUpload
+        onUploadComplete={() => {
+          fetchNotes()
+          toast.success(t('fileUploaded'))
+        }}
+        onError={(error) => toast.error(error)}
+      />
 
       <NoteList
         notes={notes}
@@ -73,7 +81,6 @@ export default function NotesPage() {
         onEditNote={handleEditNote}
         onDeleteNote={handleDeleteNote}
       />
-
       <EditNoteModal
         note={editingNote}
         isOpen={isEditModalOpen}
