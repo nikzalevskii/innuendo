@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     tesseract-ocr-rus \
     tesseract-ocr-eng \
     ffmpeg \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .

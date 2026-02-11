@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-  # PostgreSQL - основная база данных
   postgres:
     image: postgres:16-alpine
     container_name: innuendo_postgres
@@ -22,7 +21,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Redis - для очередей и кэширования
   redis:
     image: redis:7-alpine
     container_name: innuendo_redis
@@ -43,7 +41,6 @@ services:
       timeout: 3s
       retries: 5
 
-  # PgAdmin - веб-интерфейс для БД (опционально)
   pgadmin:
     image: dpage/pgadmin4:8
     container_name: innuendo_pgadmin
@@ -60,9 +57,34 @@ services:
       postgres:
         condition: service_healthy
     profiles:
-      - tools # Запускается только с --profile tools
+      - tools
 
-# Постоянные тома для данных
+  ml-service:
+    build:
+      context: ./services/ml-service
+      dockerfile: Dockerfile
+    container_name: innuendo_ml_service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ml_models_cache:/app/models_cache
+    environment:
+      - ML_HOST=0.0.0.0
+      - ML_PORT=8000
+      - ML_EMBEDDING_MODEL=all-MiniLM-L6-v2
+      - ML_WHISPER_MODEL=base
+      - ML_SPACY_MODEL=en_core_web_sm
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+    networks:
+      - innuendo_network
+
 volumes:
   postgres_data:
     name: innuendo_postgres_data
@@ -70,8 +92,9 @@ volumes:
     name: innuendo_redis_data
   pgadmin_data:
     name: innuendo_pgadmin_data
+  ml_models_cache:
+    name: innuendo_ml_models_cache
 
-# Сеть проекта
 networks:
   default:
     name: innuendo_network
