@@ -9,10 +9,18 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     curl \
     pkg-config \
+    libavcodec-dev \
+    libavformat-dev \
+    libavutil-dev \
+    libavdevice-dev \
+    libavfilter-dev \
+    libswscale-dev \
+    libswresample-dev \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --default-timeout=300 --no-cache-dir --retries 5 -r requirements.txt
 
 RUN python -m spacy download en_core_web_sm
 
